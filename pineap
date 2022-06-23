@@ -1,0 +1,67 @@
+#!/bin/bash
+
+ 
+
+/etc/init.d/pineapd start
+
+
+
+echo "setting up pineap"
+ 
+
+/usr/bin/pineap /tmp/pineap.conf logging on
+
+/usr/bin/pineap connect_notifications on
+
+/usr/bin/pineap beacon_interval NORMAL
+
+/usr/bin/pineap broadcast_pool on 
+
+/usr/bin/pineap beacon_response_interval NORMAL
+
+/usr/bin/pineap beacon_responses on
+
+/usr/bin/pineap capture_ssids on
+
+/usr/bin/pineap karma on
+
+/usr/bin/pineap logging on
+
+/usr/bin/pineap run_scan 30 0
+
+
+
+echo "running scan for 30 seconds "
+
+ 
+sleep 30
+
+/usr/bin/pineap list_ssids > loggington.txt
+
+/usr/bin/pineap list_probes > loggington2.txt
+
+
+
+echo "adding ssids"
+
+sleep 10
+
+
+/usr/bin/pineap broadcast_pool off
+
+/usr/bin/pineap beacon_responses off
+
+/usr/bin/pineap capture_ssids off
+
+/usr/bin/pineap karma off
+
+/usr/bin/pineap logging off
+
+
+/usr/bin/pineap list_probes
+
+/usr/bin/pineap get_status
+
+/usr/bin/pineap stop_scan
+
+/etc/init.d/pineapd stop
